@@ -5,7 +5,11 @@ from django.db.models import CharField, TextField, DecimalField
 class Products(models.Model):
     """Модель для представления услуг."""
 
-    name: CharField = models.CharField(max_length=200, verbose_name="Услуга")
+    name: CharField = models.CharField(
+        max_length=200,
+        verbose_name="Услуга",
+        unique=True
+    )
     description: TextField = models.TextField(
         max_length=3000,
         verbose_name="Описание"
