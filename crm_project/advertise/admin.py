@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Advertise
+from .models import Advertise, PromotionChannel
 
 
 @admin.register(Advertise)
@@ -11,3 +11,13 @@ class AdvertiseAdmin(admin.ModelAdmin):
     list_editable: tuple = ('budget',)
     list_select_related: bool = True
     autocomplete_fields: tuple = ("product",)
+
+
+@admin.register(PromotionChannel)
+class PromotionAdmin(admin.ModelAdmin):
+    """
+    Настройки для добавления и отображения каналов
+    продвижения рекламных кампаний.
+    """
+    list_display = ('id', 'name')
+    list_display_links: tuple = ('id', 'name')
