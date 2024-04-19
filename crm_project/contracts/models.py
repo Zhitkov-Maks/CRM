@@ -13,7 +13,11 @@ from products.models import Products
 class Contracts(models.Model):
     """Модель для представления рекламных компаний."""
 
-    name: CharField = models.CharField(max_length=200, verbose_name="Название")
+    name: CharField = models.CharField(
+        max_length=200,
+        verbose_name="Название",
+        unique=True
+    )
     product: ForeignKey = models.ForeignKey(
         Products,
         on_delete=models.CASCADE,
