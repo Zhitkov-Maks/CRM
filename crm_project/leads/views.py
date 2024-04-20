@@ -27,16 +27,6 @@ class ListLeads(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model: Any = Leads
     context_object_name: str = "leads"
 
-    def get_queryset(self) -> QuerySet:
-        """
-        Переопределили метод, чтобы отсечь для отображения активных клиентов.
-        Так же это исключает удаление активного клиента в списке Лидов.
-        """
-        today_date = datetime.date.today()
-        return Leads.objects.filter(Q(
-            leads__isnull=True) | Q(leads__contract__end_date__lte=today_date)
-        ).distinct()
-
 
 class ListLeadsSearch(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     """
@@ -99,7 +89,14 @@ class UpdateLeads(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
 
     permission_required: str = "leads.change_leads"
     template_name: str = "leads/leads-edit.html"
-    fields: tuple = "first_name", "last_name", "middle_name", "email", "phone"
+    fields: tuple = (
+        "first_name",
+        "last_name",
+        "middle_name",
+        "email",
+        "phone",
+        "advertising"
+    )
     model: Any = Leads
     success_url: str = "/leads/"
 
