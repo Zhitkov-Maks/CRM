@@ -20,7 +20,7 @@ class Contracts(models.Model):
     )
     product: ForeignKey = models.ForeignKey(
         Products,
-        on_delete=models.CASCADE,
+        on_delete=models.PROTECT,
         verbose_name="Услуга",
         related_name="products",
     )
@@ -35,7 +35,7 @@ class Contracts(models.Model):
     )
 
     def __str__(self):
-        return f"{str(self.name)} / {str(self.product)}"
+        return self.name
 
     class Meta:
         """
