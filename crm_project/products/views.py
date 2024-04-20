@@ -1,9 +1,8 @@
-import datetime
 from typing import Any
 
-from django.db.models import Count, QuerySet, Q
+from django.db.models import Count, QuerySet, Q, ProtectedError
 from django.http import HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.views.generic import (
     ListView,
     DetailView,
@@ -16,7 +15,6 @@ from django.contrib.auth.mixins import (
     PermissionRequiredMixin
 )
 
-from contracts.models import Contracts
 from .models import Products
 
 
@@ -110,18 +108,11 @@ class DeleteProducts(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):  
         запрещаем.
         """
         product = self.get_object()
-        today_date = datetime.date.today()
-        if (Contracts.objects.filter(
-                product_id=product.pk,
-                end_date__gte=today_date
-        ).exists()):
-            return HttpResponse(
-                """<h1 style="padding-top: 50px; text-align: center;">
-                Нельзя удалить услугу, так как имеются действующие контракты.
-                </h1>"""
-            )
-        product.delete()
-        return redirect("list-product")
+        try:
+            product.delete()
+            redirect("/products/")
+        except ProtectedError:
+            return render(request, 'products/error.html', {"product": product})
 
 
 class UpdateProducts(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
