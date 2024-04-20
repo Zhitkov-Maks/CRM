@@ -34,8 +34,7 @@ class IndexView(LoginRequiredMixin, TemplateView):
         )
         customers_count: QuerySet | Any = cache.get_or_set(
             "customers_count",
-            Customers.objects
-            .values_list("lead_id").distinct("lead_id").count(),
+            Customers.objects.values("lead_id").distinct("lead_id").count(),
             60
         )
         context.update(
