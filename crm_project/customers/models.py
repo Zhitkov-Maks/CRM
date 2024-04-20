@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import ForeignKey, OneToOneField
+from django.db.models import OneToOneField
 
 from leads.models import Leads
 from contracts.models import Contracts
@@ -8,7 +8,7 @@ from contracts.models import Contracts
 class Customers(models.Model):
     """Модель для представления активных клиентов."""
 
-    lead: ForeignKey = models.ForeignKey(
+    lead: OneToOneField = models.OneToOneField(
         Leads, on_delete=models.CASCADE, related_name="leads"
     )
     contract: OneToOneField = models.OneToOneField(
@@ -26,6 +26,6 @@ class Customers(models.Model):
         Указываем сортировку и имена которые будут указываться в админ панели.
         """
 
-        verbose_name = "активный клиент"
-        verbose_name_plural = "активные клиенты"
-        unique_together = ("lead", "contract")
+        verbose_name: str = "активный клиент"
+        verbose_name_plural: str = "активные клиенты"
+        unique_together: tuple = ("lead", "contract")
