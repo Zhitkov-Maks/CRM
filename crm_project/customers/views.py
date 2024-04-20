@@ -35,6 +35,16 @@ class CustomerList(
         """
 
         return (Customers.objects.select_related("lead")
+                .select_related("contract")
+                .prefetch_related("contract__product")
+                .only(
+                    "id",
+                    "lead__last_name",
+                    "lead__first_name",
+                    "lead__middle_name",
+                    "contract__name",
+                    "contract__product__name"
+                )
                 .order_by("lead__last_name", "lead__first_name"))
 
 
@@ -89,7 +99,7 @@ class CustomerUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     permission_required: str = "customers.change_customers"
     template_name: str = "customers/customers-edit.html"
     model: Any = Customers
-    fields: tuple = "lead", "contract"
+    fields: tuple = ("lead", "contract")
     success_url: str = "/customers/"
 
 
