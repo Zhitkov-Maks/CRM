@@ -1,10 +1,10 @@
 from django.db import models
 from django.db.models import (
     CharField,
-    ForeignKey,
     FileField,
     DateField,
-    DecimalField
+    DecimalField,
+    ForeignKey
 )
 
 from products.models import Products
@@ -25,7 +25,7 @@ class Contracts(models.Model):
         related_name="products",
     )
     file: FileField = models.FileField(
-        upload_to="files/contracts/",
+        upload_to="contracts/%Y/%m/%d",
         default=""
     )
     start_date: DateField = models.DateField(verbose_name="Дата начала")
