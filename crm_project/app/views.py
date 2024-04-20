@@ -1,7 +1,7 @@
 from typing import Any
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Count, QuerySet, Q
+from django.db.models import QuerySet
 from django.views.generic import TemplateView
 from django.core.cache import cache
 from products.models import Products
@@ -11,7 +11,9 @@ from customers.models import Customers
 
 
 class IndexView(LoginRequiredMixin, TemplateView):
-    """Класс для отображения главной страницы."""
+    """
+    Класс для отображения главной страницы с некоторой статистикой.
+    """
 
     template_name: str = "users/index.html"
 
@@ -31,7 +33,10 @@ class IndexView(LoginRequiredMixin, TemplateView):
             "leads_count", Leads.objects.count(), 60
         )
         customers_count: QuerySet | Any = cache.get_or_set(
-            "customers_count", Customers.objects.count(), 60
+            "customers_count",
+            Customers.objects
+            .values_list("lead_id").distinct("lead_id").count(),
+            60
         )
         context.update(
             {
