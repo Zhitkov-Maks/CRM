@@ -1,0 +1,8 @@
+{% extends "_base.html" %}
+
+{% block content %}
+<h2 class="fw-bold">Нельзя удалить потенциальный клиент: {{ lead.last_name }} {{ lead.first_name }} {{ lead.middle_name }}</h2>
+<div class="row bg-white px-3 py-3 mx-2 my-5 rounded pb-5 shadow-lg">
+        <h5 class="card-title error-title">Удаление выбранного потенциального клиента требует удаления связанных объектов в активных клиентах, удаление запрещено.</h5>
+</div>
+{% endblock %}
