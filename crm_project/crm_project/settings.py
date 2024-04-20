@@ -25,12 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-dyyfa3m%&+y5&r&uiwszesw#4+!mg8*cz-1w1gi#r%ao&&fu+="
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
-    "plugins.jetbrains.com",
-    "resources.jetbrains.com",
     "93.93.207.91"
 ]
 INTERNAL_IPS = [
@@ -157,4 +155,4 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_URL = "login"
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_ROOT = BASE_DIR / "files"
