@@ -33,11 +33,9 @@ class CustomerList(
         Переопределил метод, для загрузки всех нужных данных сразу,
         тем самым избегая множества дополнительных запросов к базе.
         """
-        return (
-            Customers.objects.select_related("lead")
-            .all()
-            .order_by("lead__last_name", "lead__first_name")
-        )
+
+        return (Customers.objects.select_related("lead")
+                .order_by("lead__last_name", "lead__first_name"))
 
 
 class CustomersSearch(LoginRequiredMixin, PermissionRequiredMixin, ListView):
