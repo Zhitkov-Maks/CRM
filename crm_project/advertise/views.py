@@ -80,7 +80,7 @@ class StatisticView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
             .prefetch_related("leads__leads__contract")
             .all()
             .order_by("-profit"),
-            60 * 10,
+            60,
         )
         return statistics
 
