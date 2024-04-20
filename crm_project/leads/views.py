@@ -1,11 +1,11 @@
-import datetime
 from typing import Any
 
 from django.contrib.auth.mixins import (
     LoginRequiredMixin,
     PermissionRequiredMixin
 )
-from django.db.models import Q, QuerySet
+from django.db.models import Q, QuerySet, ProtectedError
+from django.shortcuts import redirect, render
 from django.views.generic import (
     ListView,
     DetailView,
@@ -13,6 +13,7 @@ from django.views.generic import (
     UpdateView,
     CreateView,
 )
+
 from .models import Leads
 
 
@@ -79,6 +80,14 @@ class DeleteLeads(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):  # t
     template_name: str = "leads/leads-delete.html"
     model: Any = Leads
     success_url: str = "/leads/"
+
+    def post(self, request, *args, **kwargs):
+        lead: Leads = self.get_object()
+        try:
+            lead.delete()
+            redirect("/leads/")
+        except ProtectedError:
+            return render(request, 'leads/error.html', {"lead": lead})
 
 
 class UpdateLeads(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
