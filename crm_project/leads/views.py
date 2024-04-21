@@ -82,7 +82,7 @@ class DeleteLeads(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):  # t
     success_url: str = "/leads/"
 
     def post(self, request, *args, **kwargs):
-        lead: Leads = self.get_object()
+        lead = self.get_object()
         try:
             lead.delete()
             redirect("/leads/")
