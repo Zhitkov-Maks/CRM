@@ -37,13 +37,14 @@
     
     ```source venv/bin/activate``` - для линукс
 
+- ### Перейтти в папку с проектом
+
+    ```cd crm_project```
+
 - ### Установить зависимости
 
     ```pip install -r requirements.txt```
 
-- ### Перейтти в папку с проектом
-
-    ```cd crm_project```
 
 - ### Создать переменные окружения
 
@@ -51,8 +52,6 @@
     файле .env.template
 
 - ### Установить миграции
-
-    ```python3 manage.py makemigrations```
 
     ```python3 manage.py migrate```
 
@@ -64,6 +63,8 @@
 
     ```python3 manage.py loaddata fixture/group-fixture.json```
 
+    ```python3 manage.py loaddata fixture/user-fixture.json```
+
     ```python3 manage.py loaddata fixture/promotion-fixture.json```
 
 - ### Приложение готово к использованию
@@ -72,3 +73,9 @@
 
 
     Перейдите по адресу http://127.0.0.1:8000/ если тестируете локально.
+
+
+- ### Проверка линтерами
+
+  - mypy ```mypy .``` - запускать в корне проекта(crm_project) где файл mypy.ini
+  - pylint ```pylint --rcfile .pylintrc ./``` - запускать из того же места.
