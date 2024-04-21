@@ -4,10 +4,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import QuerySet
 from django.views.generic import TemplateView
 from django.core.cache import cache
-from products.models import Products
+
 from advertise.models import Advertise
-from leads.models import Leads
+from products.models import Products
 from customers.models import Customers
+from leads.models import Leads
 
 
 class IndexView(LoginRequiredMixin, TemplateView):
