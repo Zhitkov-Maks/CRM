@@ -8,7 +8,7 @@ class PromotionChannel(models.Model):
     """
     Сделал канал продвижения чтобы их можно было просто выбрать
     при создании рекламных кампаний, так как их не так много."""
-    name = models.CharField(
+    name: CharField = models.CharField(
         max_length=200,
         verbose_name="Канал продвижения",
         unique=True
