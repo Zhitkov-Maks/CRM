@@ -110,7 +110,7 @@ class DeleteProducts(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):  
         product = self.get_object()
         try:
             product.delete()
-            redirect("/products/")
+            return redirect("/products/")
         except ProtectedError:
             return render(request, 'products/error.html', {"product": product})
 
