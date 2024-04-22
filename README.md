@@ -63,10 +63,6 @@
 
     ```python3 manage.py loaddata fixture/group-fixture.json```
 
-    ```python3 manage.py loaddata fixture/user-fixture.json```
-
-    ```python3 manage.py loaddata fixture/promotion-fixture.json```
-
 - ### Приложение готово к использованию
  
     ```python3 manage.py runserver```
