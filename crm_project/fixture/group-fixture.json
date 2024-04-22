@@ -56,12 +56,17 @@
     "model": "auth.group",
     "pk": 2,
     "fields": {
-      "name": "operator",
+      "name": "manager",
       "permissions": [
         33,
         34,
         35,
-        36
+        36,
+        37,
+        38,
+        39,
+        40,
+        32
       ]
     }
   },
@@ -69,13 +74,12 @@
     "model": "auth.group",
     "pk": 3,
     "fields": {
-      "name": "manager",
+      "name": "marketing",
       "permissions": [
-        36,
-        37,
-        38,
-        39,
-        40,
+        25,
+        26,
+        27,
+        28,
         41,
         42,
         43,
@@ -87,16 +91,12 @@
     "model": "auth.group",
     "pk": 4,
     "fields": {
-      "name": "marketing_specialist",
+      "name": "operator",
       "permissions": [
-        25,
-        26,
-        27,
-        28,
-        45,
-        46,
-        47,
-        48
+        29,
+        30,
+        31,
+        32
       ]
     }
   }
