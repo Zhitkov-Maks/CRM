@@ -4,29 +4,6 @@ from django.db.models import CharField, DecimalField, ForeignKey
 from products.models import Products
 
 
-class PromotionChannel(models.Model):
-    """
-    Сделал канал продвижения чтобы их можно было просто выбрать
-    при создании рекламных кампаний, так как их не так много."""
-    name: CharField = models.CharField(
-        max_length=200,
-        verbose_name="Канал продвижения",
-        unique=True
-    )
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        """
-        Указываем как будут сортироваться каналы и
-        как будет показываться название в админ панели.
-        """
-        ordering: tuple = ("name",)
-        verbose_name: str = "канал продвижения"
-        verbose_name_plural: str = "каналы продвижения"
-
-
 class Advertise(models.Model):
     """Модель для представления рекламных компаний."""
 
@@ -44,11 +21,8 @@ class Advertise(models.Model):
         related_name="services",
         on_delete=models.CASCADE,
     )
-    promotion_channel: ForeignKey = models.ForeignKey(
-        PromotionChannel,
+    promotion_channel: CharField = models.CharField(
         verbose_name="Канал продвижения",
-        on_delete=models.SET_NULL,
-        null=True
     )
 
     def __str__(self):
